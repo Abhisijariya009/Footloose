@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
+import django_heroku
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,9 +26,9 @@ STATIC_DIR = Path.joinpath(BASE_DIR,'static')
 SECRET_KEY = 'django-insecure-0=4rk%vgcr9e+aae$f)rgv#@benmz9_yrx)e^g=i(!tl7z$35f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['foot-loose.herokuapp.com']
 
 
 # Application definition
@@ -78,20 +79,23 @@ WSGI_APPLICATION = 'Ecomm.wsgi.application'
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'Ecomm_DB',
-#         'USER': 'postgres',
-#         'PASSWORD':'asd12345',
-#         'HOST':'localhost',
-#         'PORT':'5432'
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'daom11bvv275f3',
+            'USER' : 'vczskoyzyehqkq',
+            'PASSWORD' : '02041e690246667db8c0bf93cecde9ec1a6c79b04faaa89fb0db66a5e21fd0b4',
+            'HOST' : 'ec2-52-202-152-4.compute-1.amazonaws.com',
+            'PORT' : '5432',
+        }
     }
-}
+
+
 
 
 # Password validation
@@ -138,6 +142,8 @@ STATIC_FILES_DIR = [
 MEDIA_URL = '/images/'
 MEDIA_ROOT = Path.joinpath(BASE_DIR, 'static/images')
 
+
+django_heroku.settings(locals())
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
